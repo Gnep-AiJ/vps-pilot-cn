@@ -1,0 +1,11 @@
+{
+  "name": "vps-pilot-cn",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node --check app.js && node --check worker.js"
+  },
+  "devDependencies": {
+    "wrangler": "4.107.1"
+  }
+}

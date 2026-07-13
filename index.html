@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>极简 VPS 创建</title>
+    <link rel="stylesheet" href="./styles.css?v=202607090739">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar" aria-label="顶部导航">
+        <a class="brand" href="#" aria-label="返回首页" data-next="welcome">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>VPS Pilot</span>
+        </a>
+        <div class="top-status">
+          <span id="step-label">开始</span>
+          <div class="progress-track" aria-hidden="true">
+            <span id="progress-fill"></span>
+          </div>
+        </div>
+      </header>
+
+      <main class="flow" aria-label="VPS 创建引导">
+        <section class="screen is-visible" id="view-welcome" aria-labelledby="welcome-title">
+          <div class="hero-copy">
+            <p class="eyebrow">Vultr 底层架构</p>
+            <h1 id="welcome-title">创建你的私人 VPS</h1>
+            <p class="lead">用你自己的 Vultr API 创建服务器。页面只保留必要步骤，账单和服务器都归你的 Vultr 账户。</p>
+          </div>
+          <div class="quick-facts" aria-label="默认配置">
+            <span id="fact-plan">正在读取 Vultr 套餐</span>
+            <span id="fact-cost">正在读取价格</span>
+            <span>Ubuntu LTS</span>
+          </div>
+          <button class="primary-action wide" data-next="api" type="button">开始创建</button>
+        </section>
+
+        <section class="screen" id="view-api" aria-labelledby="api-title">
+          <div class="screen-head">
+            <p class="eyebrow">1 / 6</p>
+            <h2 id="api-title">输入 Vultr API</h2>
+            <p>API 用于创建和管理服务器。可选择只保存在本机浏览器，方便下次打开。</p>
+          </div>
+
+          <div class="api-layout">
+            <form class="api-card" id="api-form">
+              <label class="field">
+                <span>Vultr API Key</span>
+                <input id="api-key" autocomplete="off" inputmode="text" placeholder="粘贴你的 Vultr API Key" type="password">
+              </label>
+              <label class="remember-line">
+                <input id="remember-api-key" type="checkbox" checked>
+                <span>在本机浏览器记住 API Key</span>
+              </label>
+              <p class="field-error" id="api-error" hidden>API Key 看起来太短，请检查后重试。</p>
+              <button class="primary-action" id="verify-api" type="submit">保存并继续</button>
+            </form>
+
+            <aside class="guide-card" aria-labelledby="guide-title">
+              <h3 id="guide-title">如何获取 API</h3>
+              <p>先通过注册链接注册 Vultr，并完成充值后再启用 API。</p>
+              <button class="ghost-action" id="open-api-guide" type="button">查看教程</button>
+              <div class="guide-links">
+                <a class="guide-link" href="https://www.vultr.com/?ref=9910335" target="_blank" rel="noreferrer">1. 注册</a>
+                <a class="guide-link" href="https://console.vultr.com/billing/#billingaddfunds" target="_blank" rel="noreferrer">2. 充值</a>
+                <a class="guide-link" href="https://console.vultr.com/user/apiaccess/" target="_blank" rel="noreferrer">3. API</a>
+                <button class="guide-link guide-link-button" id="open-api-guide-copy" type="button">4. 复制</button>
+              </div>
+            </aside>
+          </div>
+
+          <div class="flow-actions">
+            <button class="ghost-action" data-next="welcome" type="button">返回</button>
+          </div>
+        </section>
+
+        <section class="screen" id="view-region" aria-labelledby="region-title">
+          <div class="screen-head">
+            <p class="eyebrow">2 / 6</p>
+            <h2 id="region-title">选择服务器地区</h2>
+            <p>离你越近，连接通常越快。</p>
+          </div>
+
+          <div class="choice-list" id="region-list" aria-live="polite">
+            <div class="loading-line">正在读取 Vultr 地区信息</div>
+          </div>
+
+          <div class="flow-actions">
+            <button class="ghost-action" data-next="welcome" type="button">返回</button>
+            <button class="primary-action" data-next="plan" type="button">继续</button>
+          </div>
+        </section>
+
+        <section class="screen" id="view-plan" aria-labelledby="plan-title">
+          <div class="screen-head">
+            <p class="eyebrow">3 / 6</p>
+            <h2 id="plan-title">选择服务器配置</h2>
+            <p>默认基础款已经足够个人使用。</p>
+          </div>
+
+          <div class="plan-list" id="plan-list" aria-live="polite">
+            <div class="loading-line">正在读取 Vultr 套餐信息</div>
+          </div>
+
+          <div class="flow-actions">
+            <button class="ghost-action" data-next="region" type="button">返回</button>
+            <button class="primary-action" data-next="confirm" type="button">继续</button>
+          </div>
+        </section>
+
+        <section class="screen" id="view-confirm" aria-labelledby="confirm-title">
+          <div class="screen-head">
+            <p class="eyebrow">4 / 6</p>
+            <h2 id="confirm-title">确认创建</h2>
+            <p>下一步会用你的 Vultr API 创建服务器，费用由你的 Vultr 账户承担。</p>
+          </div>
+
+          <dl class="receipt">
+            <div>
+              <dt>地区</dt>
+              <dd id="confirm-region">读取中</dd>
+            </div>
+            <div>
+              <dt>套餐</dt>
+              <dd id="confirm-plan">读取中</dd>
+            </div>
+            <div>
+              <dt>系统</dt>
+              <dd>Ubuntu LTS</dd>
+            </div>
+            <div>
+              <dt>预估费用</dt>
+              <dd id="confirm-cost">读取中</dd>
+            </div>
+            <div>
+              <dt>API 状态</dt>
+              <dd>
+                <span class="status-pill is-waiting" id="confirm-api">
+                  <span class="status-dot" aria-hidden="true"></span>
+                  <span id="confirm-api-label">未验证</span>
+                </span>
+              </dd>
+            </div>
+          </dl>
+
+          <label class="confirm-line">
+            <input id="terms" type="checkbox">
+            <span>我确认创建后会在我的 Vultr 账户产生云服务器费用，并仅用于合法自用。</span>
+          </label>
+
+            <div class="flow-actions">
+              <button class="ghost-action" data-next="plan" type="button">返回</button>
+              <button class="primary-action" id="start-create" type="button" disabled>开始创建</button>
+            </div>
+        </section>
+
+        <section class="screen" id="view-progress" aria-labelledby="progress-title">
+          <div class="screen-head">
+            <p class="eyebrow">5 / 6</p>
+            <h2 id="progress-title">正在创建</h2>
+            <p>正在根据你的配置调用 Vultr API 创建服务器。</p>
+          </div>
+
+          <div class="build-card" aria-live="polite">
+            <div class="build-ring" aria-hidden="true"></div>
+            <strong id="build-message">正在验证 API</strong>
+            <span>通常需要 2 到 5 分钟</span>
+          </div>
+        </section>
+
+        <section class="screen" id="view-failure" aria-labelledby="failure-title">
+          <div class="screen-head">
+            <p class="eyebrow">创建失败</p>
+            <h2 id="failure-title">没有创建成功</h2>
+            <p id="failure-reason">余额不足或账户不可用，请到 Vultr 处理后重试。</p>
+          </div>
+
+          <div class="inline-warning">
+            常见原因：Vultr 余额不足、账号未完成验证、API 权限不足、API IP 白名单未包含本站服务器 IP，或所选地区暂时没有库存。
+          </div>
+
+          <div class="flow-actions">
+            <button class="ghost-action" data-next="api" type="button">重新验证 API</button>
+            <a class="primary-action action-link" id="billing-link" href="https://console.vultr.com/billing/#billingaddfunds" target="_blank" rel="noreferrer" hidden>去 Vultr 充值</a>
+            <button class="primary-action" data-next="confirm" type="button">返回确认</button>
+          </div>
+        </section>
+
+        <section class="screen" id="view-server" aria-labelledby="server-title">
+          <div class="screen-head">
+            <p class="eyebrow">6 / 6</p>
+            <h2 id="server-title">服务器管理</h2>
+            <p>已读取你 Vultr 账户中的服务器。你可以保存 SSH 信息、删除当前服务器，或配置为节点。</p>
+          </div>
+
+          <div class="server-card">
+            <div class="server-main">
+              <span>IP Address</span>
+              <strong id="server-ip">等待创建</strong>
+            </div>
+            <div class="server-meta">
+              <span id="server-region">读取中</span>
+              <span id="server-plan">读取中</span>
+              <span id="server-status">运行中</span>
+            </div>
+          </div>
+
+          <section class="detail-block" aria-labelledby="ssh-title">
+            <div class="block-title">
+              <h3 id="ssh-title">服务器登录信息</h3>
+              <button class="text-button" id="toggle-ssh" type="button">显示</button>
+            </div>
+            <div class="secret-fields" hidden>
+              <label>
+                <span>IP Address</span>
+                <input id="ssh-ip" readonly value="">
+              </label>
+              <label>
+                <span>Username</span>
+                <input id="ssh-user" readonly value="root">
+              </label>
+              <label id="ssh-pass-row">
+                <span>Password</span>
+                <input id="ssh-pass" readonly value="">
+              </label>
+              <p class="password-help" id="password-help" hidden>
+                Vultr 未返回密码，<a id="password-console-link" href="https://console.vultr.com/compute/" target="_blank" rel="noreferrer">打开 Vultr 查看密码</a>。
+              </p>
+              <p>请妥善保存，不要公开分享。</p>
+            </div>
+          </section>
+
+          <div class="flow-actions">
+            <button class="danger-action" id="delete-server" type="button">删除当前服务器</button>
+            <button class="primary-action" id="open-node-guide" type="button">将服务器配置为节点</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <dialog class="modal" id="api-guide-modal" aria-labelledby="api-guide-title">
+      <div class="modal-panel">
+        <div class="modal-head">
+          <div>
+            <p class="eyebrow">Vultr API</p>
+            <h2 id="api-guide-title">获取 API Key</h2>
+          </div>
+          <button class="icon-button" id="close-api-guide" type="button" aria-label="关闭教程">×</button>
+        </div>
+
+        <div class="guide-steps">
+          <article class="guide-step">
+            <button class="guide-shot zoom-shot" type="button" data-zoom-image="./uploads/user/1783579191-a759904985.jpeg" data-zoom-title="注册 Vultr 账户">
+              <img src="./uploads/user/1783579191-a759904985.jpeg" alt="Vultr 注册页面，包含邮箱、密码、验证码和创建账户按钮">
+            </button>
+            <div>
+              <h3><a class="heading-link" href="https://www.vultr.com/?ref=9910335" target="_blank" rel="noreferrer">1. 注册 Vultr 账户</a></h3>
+              <p>通过本站注册链接进入 Vultr，填写邮箱和密码，完成人机验证后创建账户。</p>
+            </div>
+          </article>
+          <article class="guide-step">
+            <button class="guide-shot zoom-shot" type="button" data-zoom-image="./uploads/user/1783578999-c9ec3a7c32.jpg" data-zoom-title="充值账户余额">
+              <img src="./uploads/user/1783578999-c9ec3a7c32.jpg" alt="Vultr Billing 页面，选择 Alipay 和充值金额后付款">
+            </button>
+            <div>
+              <h3><a class="heading-link" href="https://console.vultr.com/billing/#billingaddfunds" target="_blank" rel="noreferrer">2. 充值账户余额</a></h3>
+              <p>Vultr 需要账户有可用余额或付款方式，才能启用 API。选择支付方式和金额后完成充值。</p>
+            </div>
+          </article>
+          <article class="guide-step">
+            <button class="guide-shot zoom-shot" type="button" data-zoom-image="./uploads/tutorial-api/1783562707-2.jpeg" data-zoom-title="启用 API Access">
+              <img src="./uploads/tutorial-api/1783562707-2.jpeg" alt="Vultr User Account 中的 API Access 和 Enable API Access">
+            </button>
+            <div>
+              <h3><a class="heading-link" href="https://console.vultr.com/user/apiaccess/" target="_blank" rel="noreferrer">3. 创建 API Key</a></h3>
+              <p>进入 API Access 页面，点击 Enable API Access，生成当前账户的 Personal Key。</p>
+            </div>
+          </article>
+          <article class="guide-step">
+            <button class="guide-shot zoom-shot" type="button" data-zoom-image="./uploads/tutorial-api/1783562707-3.jpeg" data-zoom-title="复制 Personal Key">
+              <img src="./uploads/tutorial-api/1783562707-3.jpeg" alt="Vultr Personal Key 复制和 Finalize Key Generation">
+            </button>
+            <div>
+              <h3><button class="paste-key-action" id="paste-api-key" type="button">4. 复制并完成生成</button></h3>
+              <p>点击 Copy 复制 Key，勾选确认已复制，再点击 Finalize Key Generation。复制后回到本页粘贴。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="image-modal" id="image-modal" aria-labelledby="image-modal-title">
+      <div class="image-panel">
+        <div class="modal-head">
+          <h2 id="image-modal-title">查看图片</h2>
+          <button class="icon-button" id="close-image-modal" type="button" aria-label="关闭图片">×</button>
+        </div>
+        <img id="image-modal-img" alt="">
+      </div>
+    </dialog>
+
+    <dialog class="modal node-modal" id="node-guide-modal" aria-labelledby="node-guide-title">
+      <div class="modal-panel">
+        <div class="modal-head">
+          <div>
+            <p class="eyebrow">Node Setup</p>
+            <h2 id="node-guide-title">配置节点教程</h2>
+          </div>
+          <button class="icon-button" id="close-node-guide" type="button" aria-label="关闭节点教程">×</button>
+        </div>
+
+        <section class="detail-block">
+          <div class="block-title">
+            <h3>把以下配置说明复制到你的部署工具</h3>
+            <button class="text-button" id="copy-node-prompt" type="button">复制</button>
+          </div>
+          <textarea class="prompt-output" id="node-prompt-output" readonly aria-label="节点配置提示词"></textarea>
+        </section>
+      </div>
+    </dialog>
+
+    <div class="toast" role="status" aria-live="polite" hidden>已复制</div>
+    <script src="./app.js?v=202607090739"></script>
+  </body>
+</html>
