@@ -9,6 +9,7 @@
   "kv_namespaces": [
     {
       "binding": "SESSIONS",
+      // 此 id 只在创建该 KV 命名空间的 Cloudflare 账户中有效，换环境部署前请替换。
       "id": "cea0590630da48e6acefd9250542dd64"
     }
   ]
