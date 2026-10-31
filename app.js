@@ -54,10 +54,6 @@ const apiGuideModal = document.querySelector("#api-guide-modal");
 const openApiGuide = document.querySelector("#open-api-guide");
 const openApiGuideCopy = document.querySelector("#open-api-guide-copy");
 const closeApiGuide = document.querySelector("#close-api-guide");
-const imageModal = document.querySelector("#image-modal");
-const imageModalTitle = document.querySelector("#image-modal-title");
-const imageModalImg = document.querySelector("#image-modal-img");
-const closeImageModal = document.querySelector("#close-image-modal");
 const pasteApiKey = document.querySelector("#paste-api-key");
 const serverIp = document.querySelector("#server-ip");
 const serverStatus = document.querySelector("#server-status");
@@ -131,27 +127,6 @@ function bindStaticEvents() {
   apiGuideModal.addEventListener("click", (event) => {
     if (event.target === apiGuideModal) {
       apiGuideModal.close();
-    }
-  });
-
-  document.querySelectorAll("[data-zoom-image]").forEach((button) => {
-    button.addEventListener("click", () => {
-      imageModalTitle.textContent = button.dataset.zoomTitle || "查看图片";
-      imageModalImg.src = button.dataset.zoomImage;
-      imageModalImg.alt = button.querySelector("img") ? button.querySelector("img").alt : "";
-      imageModal.showModal();
-    });
-  });
-
-  closeImageModal.addEventListener("click", () => {
-    imageModal.close();
-    imageModalImg.removeAttribute("src");
-  });
-
-  imageModal.addEventListener("click", (event) => {
-    if (event.target === imageModal) {
-      imageModal.close();
-      imageModalImg.removeAttribute("src");
     }
   });
 
