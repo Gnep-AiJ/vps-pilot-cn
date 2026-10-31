@@ -2,7 +2,7 @@
 
 一个简洁的中文 Vultr VPS 创建和管理页面。用户使用自己的 Vultr API Key 创建服务器，账单和资源都保留在用户自己的 Vultr 账户内。
 
-线上地址：<https://vps.w1nter.workers.dev/>
+部署到 Cloudflare Workers 后，使用你自己的 Workers 地址访问。
 
 ## 功能
 
@@ -30,7 +30,7 @@ http://127.0.0.1:8791/
 
 ## Cloudflare Workers 部署
 
-项目使用 Cloudflare Workers、静态资源和 KV。首次部署前，需要在 `wrangler.jsonc` 中填写自己账户下的 KV 命名空间 ID。
+项目使用 Cloudflare Workers、静态资源和 KV。`wrangler.jsonc` 里的 KV 命名空间 ID 只在创建该命名空间的 Cloudflare 账户中有效，换环境部署前请改成自己的 ID。
 
 ```bash
 npm install
