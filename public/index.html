@@ -249,54 +249,34 @@
           <button class="icon-button" id="close-api-guide" type="button" aria-label="关闭教程">×</button>
         </div>
 
+        <p class="guide-images-note">仓库不附带控制台截图。自建时如需配图，把你自己的教程图片放到 <code>uploads/</code>（本地）或 <code>public/uploads/</code>（Workers），再接到对应步骤。</p>
+
         <div class="guide-steps">
           <article class="guide-step">
-            <button class="guide-shot zoom-shot" type="button" data-zoom-image="./uploads/user/1783579191-a759904985.jpeg" data-zoom-title="注册 Vultr 账户">
-              <img src="./uploads/user/1783579191-a759904985.jpeg" alt="Vultr 注册页面，包含邮箱、密码、验证码和创建账户按钮">
-            </button>
             <div>
               <h3><a class="heading-link" href="https://www.vultr.com/?ref=9910335" target="_blank" rel="noreferrer">1. 注册 Vultr 账户</a></h3>
               <p>通过本站注册链接进入 Vultr，填写邮箱和密码，完成人机验证后创建账户。</p>
             </div>
           </article>
           <article class="guide-step">
-            <button class="guide-shot zoom-shot" type="button" data-zoom-image="./uploads/user/1783578999-c9ec3a7c32.jpg" data-zoom-title="充值账户余额">
-              <img src="./uploads/user/1783578999-c9ec3a7c32.jpg" alt="Vultr Billing 页面，选择 Alipay 和充值金额后付款">
-            </button>
             <div>
               <h3><a class="heading-link" href="https://console.vultr.com/billing/#billingaddfunds" target="_blank" rel="noreferrer">2. 充值账户余额</a></h3>
               <p>Vultr 需要账户有可用余额或付款方式，才能启用 API。选择支付方式和金额后完成充值。</p>
             </div>
           </article>
           <article class="guide-step">
-            <button class="guide-shot zoom-shot" type="button" data-zoom-image="./uploads/tutorial-api/1783562707-2.jpeg" data-zoom-title="启用 API Access">
-              <img src="./uploads/tutorial-api/1783562707-2.jpeg" alt="Vultr User Account 中的 API Access 和 Enable API Access">
-            </button>
             <div>
               <h3><a class="heading-link" href="https://console.vultr.com/user/apiaccess/" target="_blank" rel="noreferrer">3. 创建 API Key</a></h3>
               <p>进入 API Access 页面，点击 Enable API Access，生成当前账户的 Personal Key。</p>
             </div>
           </article>
           <article class="guide-step">
-            <button class="guide-shot zoom-shot" type="button" data-zoom-image="./uploads/tutorial-api/1783562707-3.jpeg" data-zoom-title="复制 Personal Key">
-              <img src="./uploads/tutorial-api/1783562707-3.jpeg" alt="Vultr Personal Key 复制和 Finalize Key Generation">
-            </button>
             <div>
               <h3><button class="paste-key-action" id="paste-api-key" type="button">4. 复制并完成生成</button></h3>
               <p>点击 Copy 复制 Key，勾选确认已复制，再点击 Finalize Key Generation。复制后回到本页粘贴。</p>
             </div>
           </article>
         </div>
-      </div>
-    </dialog>
-
-    <dialog class="image-modal" id="image-modal" aria-labelledby="image-modal-title">
-      <div class="image-panel">
-        <div class="modal-head">
-          <h2 id="image-modal-title">查看图片</h2>
-          <button class="icon-button" id="close-image-modal" type="button" aria-label="关闭图片">×</button>
-        </div>
-        <img id="image-modal-img" alt="">
       </div>
     </dialog>
 

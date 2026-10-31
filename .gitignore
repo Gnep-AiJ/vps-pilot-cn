@@ -16,3 +16,7 @@ node_modules/
 dist/
 build/
 .cache/
+
+# Local tutorial screenshots. Keep personal dashboard captures out of the public repo.
+/uploads/
+/public/uploads/

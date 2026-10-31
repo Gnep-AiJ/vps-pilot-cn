@@ -47,7 +47,7 @@ npx wrangler deploy
 ## 数据说明
 
 - `vultr-regions.json` 和 `vultr-plans-vc2.json` 是页面使用的 Vultr 地区和套餐数据。
-- `uploads/` 存放教程截图。
+- 教程截图不随仓库发布。自建需要配图时，把你自己的图片放到 `uploads/`（本地 Python）或 `public/uploads/`（Workers）。这两个目录已被 Git 忽略。
 - 用户选择记住 API Key 后，Key 会保存在当前浏览器的 `localStorage`。
 - Cloudflare Workers 版本会在 KV 中临时保存 API 会话和创建任务，分别用于当前操作和后续查询、删除；任务记录最长保留 24 小时。
 - 本地 Python 版本只在进程内存中保存会话和任务，服务重启后自动清空。
@@ -65,5 +65,4 @@ package.json
 vultr-regions.json
 vultr-plans-vc2.json
 public/
-uploads/
 ```
